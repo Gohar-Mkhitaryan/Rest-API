@@ -1,0 +1,46 @@
+'use strict';
+let users = require('../users/users.js');
+class UserCtrl{
+    static async getContactController(req, res){
+        return res.send({
+           data: users
+        });
+    }
+    static async postContactController(req, res){
+        const requestQuery = req.query;
+        users.push({
+                id: ++id,
+                ...requestQuery
+            }
+        )
+        return res.send({
+            data: users
+        });
+    }
+    static async deleteContactController(req, res){
+        const requestQuery = req.query;
+                users = users.filter((user)=>{
+                    return user.id !== +requestQuery.id;
+                })
+        
+        return res.send({
+            data: users
+        });
+    
+    }
+    static async putContactController(req, res){
+        const requestQuery = req.query;
+                users = users.map((user)=>{
+                   if(user.id === +requestQuery.id){
+                    user.name = requestQuery.name
+                   }
+                   return user;
+                })
+        
+        return res.send({
+            data: users
+        });
+    }
+}
+
+module.exports = {UserCtrl};
